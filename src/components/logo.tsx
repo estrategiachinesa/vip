@@ -8,7 +8,7 @@ export const Logo = () => (
        <Fan className="h-6 w-6 text-primary" />
     </div>
     <span className="text-xl font-bold font-headline text-foreground hidden sm:inline-block">
-      Trading Ascent
+      Estratégia Chinesa
     </span>
   </Link>
 );

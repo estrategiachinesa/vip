@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Trading Ascent',
+  title: 'Estratégia Chinesa',
   description: 'Alcance a consistência que você sempre buscou no trading.',
 };
 

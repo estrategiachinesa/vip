@@ -441,7 +441,7 @@ const Footer = () => (
     <div className="container mx-auto px-4 text-center text-sm">
       <Logo />
       <p className="mt-4">
-        © {new Date().getFullYear()} Trading Ascent. Todos os direitos
+        © {new Date().getFullYear()} Estratégia Chinesa. Todos os direitos
         reservados.
       </p>
       <p className="mt-4 max-w-3xl mx-auto">
