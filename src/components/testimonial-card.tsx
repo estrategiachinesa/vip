@@ -1,6 +1,6 @@
 import { highlightTestimonial } from "@/ai/flows/highlight-testimonial";
 import Image from "next/image";
-import { Star } from "lucide-react";
+import { Star, UserCircle2 } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -62,10 +62,7 @@ export default async function TestimonialCard({
         <HighlightedText text={highlightedText} />
       </CardContent>
       <CardFooter className="flex flex-col items-center mt-4">
-        <Avatar className="h-16 w-16 mb-2">
-            <AvatarImage src={image} alt={name} data-ai-hint={imageHint} />
-            <AvatarFallback>{name.charAt(0)}</AvatarFallback>
-        </Avatar>
+        <UserCircle2 className="h-16 w-16 mb-2 text-muted-foreground" />
         <p className="font-bold font-headline text-foreground">{name}</p>
         <p className="text-sm text-muted-foreground">{location}</p>
       </CardFooter>
