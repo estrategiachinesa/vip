@@ -158,37 +158,25 @@ const benefits = [
 
 const BenefitsSection = () => (
   <section id="benefits" className="py-16 md:py-24 bg-card">
-    <div className="container mx-auto px-4">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">
-            Transforme seu Trading Agora Mesmo
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg">
-            Com a Estratégia Chinesa, você terá em mãos tudo o que precisa para
-            alcançar a tão sonhada consistência no mercado.
-          </p>
-          <ul className="mt-8 space-y-4">
-            {benefits.map((benefit, index) => (
-              <li key={index} className="flex items-start">
-                <CheckCircle2 className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                <span className="text-lg text-muted-foreground">
-                  {benefit}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <Image
-            src="https://placehold.co/600x400.png"
-            alt="Benefit illustration"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-xl"
-            data-ai-hint="success profit"
-          />
-        </div>
+    <div className="container mx-auto px-4 text-center">
+      <div className="max-w-3xl mx-auto">
+        <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">
+          Transforme seu Trading Agora Mesmo
+        </h2>
+        <p className="mt-4 text-muted-foreground text-lg">
+          Com a Estratégia Chinesa, você terá em mãos tudo o que precisa para
+          alcançar a tão sonhada consistência no mercado.
+        </p>
+        <ul className="mt-8 space-y-4 inline-block text-left">
+          {benefits.map((benefit, index) => (
+            <li key={index} className="flex items-start">
+              <CheckCircle2 className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+              <span className="text-lg text-muted-foreground">
+                {benefit}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
@@ -312,32 +300,18 @@ const OfferSection = () => (
 
 const GuaranteeSection = () => (
   <section id="guarantee" className="py-16 md:py-24">
-    <div className="container mx-auto px-4">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="text-center md:text-left">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">
-            Seu Risco é Zero!
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg">
-            Temos tanta confiança na Estratégia Chinesa que oferecemos uma
-            garantia incondicional. Se por qualquer motivo você não ficar
-            satisfeito nos primeiros 30 dias, devolvemos 100% do seu dinheiro.
-            Sem perguntas, sem burocracia.
-          </p>
-        </div>
-        <div className="flex justify-center">
-          <div className="relative">
-            <ShieldCheck className="h-48 w-48 text-primary opacity-20 absolute -top-4 -left-4" />
-            <Image
-              src="https://placehold.co/300x300.png"
-              alt="30-day guarantee seal"
-              width={300}
-              height={300}
-              className="rounded-full shadow-xl relative z-10"
-              data-ai-hint="guarantee seal"
-            />
-          </div>
-        </div>
+    <div className="container mx-auto px-4 text-center">
+      <div className="max-w-3xl mx-auto">
+        <ShieldCheck className="h-24 w-24 text-primary opacity-20 mx-auto mb-4" />
+        <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">
+          Seu Risco é Zero!
+        </h2>
+        <p className="mt-4 text-muted-foreground text-lg">
+          Temos tanta confiança na Estratégia Chinesa que oferecemos uma
+          garantia incondicional. Se por qualquer motivo você não ficar
+          satisfeito nos primeiros 30 dias, devolvemos 100% do seu dinheiro.
+          Sem perguntas, sem burocracia.
+        </p>
       </div>
     </div>
   </section>
