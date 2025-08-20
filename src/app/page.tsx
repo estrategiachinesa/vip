@@ -30,7 +30,7 @@ import TestimonialCard from "@/components/testimonial-card";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-const CTA_URL = "#offer";
+const CTA_URL = "https://pay.kiwify.com.br/N2HRXHr";
 
 const Header = () => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-sm">
