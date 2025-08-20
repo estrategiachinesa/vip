@@ -46,17 +46,8 @@ const Header = () => (
 const HeroSection = () => (
   <section
     id="hero"
-    className="relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat pt-16"
+    className="relative flex min-h-screen items-center justify-center bg-gray-900 pt-16"
   >
-    <div className="absolute inset-0 bg-black/50" />
-    <Image
-      src="https://placehold.co/1920x1080.png"
-      alt="Trading charts"
-      layout="fill"
-      objectFit="cover"
-      className="z-[-1]"
-      data-ai-hint="trading charts"
-    />
     <div className="container relative z-10 mx-auto px-4 text-center text-white">
       <h1 className="font-headline text-4xl font-bold uppercase tracking-tight text-white md:text-6xl lg:text-7xl">
         ALCANCE A CONSISTÊNCIA QUE VOCÊ SEMPRE BUSCOU NO TRADING
