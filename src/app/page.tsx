@@ -119,7 +119,7 @@ const SolutionSection = () => (
     <div className="container mx-auto px-4">
       <div className="text-center">
         <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">
-          A Solução Definitiva: Indicador ESTRATEGIA CHINESA
+          A Solução Definitiva: Indicador da ESTRATEGIA CHINESA
         </h2>
         <p className="mt-4 max-w-3xl mx-auto text-muted-foreground text-lg">
           Assista ao vídeo abaixo e veja como o indicador funciona na prática.
