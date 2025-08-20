@@ -1,58 +1,142 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Youtube, Play, Pause } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const VIDEO_LENGTH_SECONDS = 135; // 2 minutes 15 seconds
+const CustomProgressBar = ({ 
+  progress, 
+  duration, 
+  isPlaying 
+}: { 
+  progress: number, 
+  duration: number, 
+  isPlaying: boolean 
+}) => {
+  const progressPercent = (progress / duration) * 100;
 
-const CustomProgressBar = ({ isPlaying }: { isPlaying: boolean }) => (
-  <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gray-500/50">
-    <div
-      className={cn(
-        "h-full bg-primary",
-        isPlaying ? "animate-progress" : ""
-      )}
-    ></div>
-    <style jsx>{`
-      @keyframes progress {
-        0% { width: 0%; }
-        10% { width: 60%; }
-        70% { width: 80%; }
-        80% { width: 90%; }
-        100% { width: 100%; }
-      }
-      .animate-progress {
-        animation: progress ${VIDEO_LENGTH_SECONDS}s linear forwards;
-      }
-    `}</style>
-  </div>
-);
+  return (
+    <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gray-500/50">
+      <div
+        className="h-full bg-primary transition-all duration-1000 linear"
+        style={{ 
+          width: `${progressPercent}%`,
+        }}
+      ></div>
+    </div>
+  );
+};
+
 
 export default function YoutubePlayer({ videoId }: { videoId: string }) {
   const [videoEnded, setVideoEnded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const playerRef = useRef<any>(null);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const progressIntervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     setIsClient(true);
+
+    const loadYouTubeAPI = () => {
+      if (!(window as any).YT) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        if (firstScriptTag && firstScriptTag.parentNode) {
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+      }
+
+      (window as any).onYouTubeIframeAPIReady = () => {
+        createPlayer();
+      };
+
+      if ((window as any).YT && (window as any).YT.Player) {
+        createPlayer();
+      }
+    };
+
+    loadYouTubeAPI();
+
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+
   }, []);
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isPlaying) {
-      timer = setTimeout(() => {
-        setVideoEnded(true);
-        setIsPlaying(false);
-      }, VIDEO_LENGTH_SECONDS * 1000);
+  const createPlayer = () => {
+    const startTime = parseFloat(localStorage.getItem(`videoTime_${videoId}`) || '0');
+    playerRef.current = new (window as any).YT.Player('youtube-player-iframe', {
+      videoId: videoId,
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        showinfo: 0,
+        rel: 0,
+        iv_load_policy: 3,
+        modestbranding: 1,
+        disablekb: 1,
+        start: Math.floor(startTime),
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  const onPlayerReady = (event: any) => {
+    setDuration(event.target.getDuration());
+    const storedTime = parseFloat(localStorage.getItem(`videoTime_${videoId}`) || '0');
+    if (storedTime > 0) {
+        event.target.seekTo(storedTime, true);
+        setProgress(storedTime);
     }
-    return () => clearTimeout(timer);
-  }, [isPlaying]);
+  };
+
+  const onPlayerStateChange = (event: any) => {
+    if (event.data === (window as any).YT.PlayerState.ENDED) {
+      setVideoEnded(true);
+      setIsPlaying(false);
+      localStorage.setItem(`videoTime_${videoId}`, '0');
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    }
+    if (event.data === (window as any).YT.PlayerState.PLAYING) {
+        setIsPlaying(true);
+        progressIntervalRef.current = setInterval(() => {
+            const currentTime = event.target.getCurrentTime();
+            setProgress(currentTime);
+            localStorage.setItem(`videoTime_${videoId}`, currentTime.toString());
+        }, 1000);
+    } else {
+        setIsPlaying(false);
+        if (progressIntervalRef.current) {
+            clearInterval(progressIntervalRef.current);
+        }
+        if (event.target.getCurrentTime) {
+          localStorage.setItem(`videoTime_${videoId}`, event.target.getCurrentTime().toString());
+        }
+    }
+  };
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+    if (playerRef.current && playerRef.current.getPlayerState) {
+      const playerState = playerRef.current.getPlayerState();
+      if (playerState === (window as any).YT.PlayerState.PLAYING) {
+        playerRef.current.pauseVideo();
+      } else {
+        playerRef.current.playVideo();
+      }
+    }
   };
   
   if (!isClient) {
@@ -63,24 +147,19 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
     <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black shadow-2xl">
       {!videoEnded ? (
         <>
-          <iframe
-            id="youtube-player"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=${isPlaying ? 1 : 0}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&enablejsapi=1`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="absolute top-0 left-0 h-full w-full pointer-events-none"
-          ></iframe>
+          <div id="youtube-player-iframe" className="absolute top-0 left-0 h-full w-full pointer-events-none"></div>
+          
           <div className="absolute inset-0 flex items-center justify-center" onClick={togglePlay}>
              <button
                 aria-label={isPlaying ? "Pause" : "Play"}
-                className="bg-black/50 text-white rounded-full p-4 transition-opacity duration-300 opacity-100 hover:opacity-75 focus:opacity-100 group-hover:opacity-100"
+                className={cn("bg-black/50 text-white rounded-full p-4 transition-opacity duration-300 opacity-0 hover:opacity-75 focus:opacity-100 group-hover:opacity-100",
+                !isPlaying && "opacity-100"
+                )}
               >
                 {isPlaying ? <Pause className="h-10 w-10" /> : <Play className="h-10 w-10" />}
               </button>
           </div>
-          <CustomProgressBar isPlaying={isPlaying} />
+          <CustomProgressBar isPlaying={isPlaying} progress={progress} duration={duration} />
         </>
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-center bg-gray-800 text-white p-8 text-center">
