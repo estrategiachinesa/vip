@@ -326,7 +326,7 @@ const faqs = [
   {
     question: "O indicador funciona em qualquer corretora?",
     answer:
-      "Sim, o indicador é compatível com a plataforma MetaTrader 4 (MT4), que pode ser conectada à maioria das corretoras de Opções Binárias do mercado.",
+      "Sim, o indicador é compatível com a plataforma TradingView, e também pode ser conectada à maioria das corretoras de Opções Binárias do mercado",
   },
   {
     question: "O acesso é vitalício?",
