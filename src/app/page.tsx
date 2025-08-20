@@ -56,7 +56,7 @@ const HeroSection = () => (
         Descubra a Estratégia Chinesa: O indicador que revela o momento exato
         para entrar e vencer em Opções Binárias no M1, sem usar Martingale.
       </p>
-      <Button asChild size="lg" className="mt-8 text-lg font-bold">
+      <Button asChild size="lg" className="mt-8 text-base md:text-lg font-bold px-6 md:px-8">
         <Link href={CTA_URL}>
           QUERO ACESSO IMEDIATO À ESTRATEGIA CHINESA
         </Link>
@@ -230,10 +230,10 @@ const OfferSection = () => (
     <div className="container mx-auto px-4">
       <Card className="max-w-4xl mx-auto shadow-2xl border-2 border-primary">
         <CardHeader className="text-center bg-primary text-primary-foreground p-6 rounded-t-lg">
-          <h2 className="font-headline text-3xl font-bold">
+          <h2 className="font-headline text-2xl md:text-3xl font-bold">
             OFERTA ESPECIAL POR TEMPO LIMITADO
           </h2>
-          <p className="text-lg opacity-90">
+          <p className="text-base md:text-lg opacity-90">
             O Acesso Imediato à Estratégia Chinesa está com um preço que não vai
             se repetir.
           </p>
@@ -280,7 +280,7 @@ const OfferSection = () => (
               <Button
                 asChild
                 size="lg"
-                className="mt-6 w-full text-lg font-bold animate-pulse"
+                className="mt-6 w-full text-base md:text-lg font-bold animate-pulse"
               >
                 <Link href={CTA_URL}>
                   SIM, QUERO MEU ACESSO AGORA!
@@ -391,7 +391,7 @@ const FinalCtaSection = () => (
       <Button
         asChild
         size="lg"
-        className="mt-12 text-xl font-bold animate-pulse"
+        className="mt-12 text-base md:text-xl font-bold animate-pulse px-6 md:px-8"
       >
         <Link href={CTA_URL}>
           QUERO A DECISÃO INTELIGENTE!
@@ -437,3 +437,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
