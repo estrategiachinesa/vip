@@ -58,7 +58,7 @@ const HeroSection = () => (
       </p>
       <Button asChild size="lg" className="mt-8 text-lg font-bold">
         <Link href={CTA_URL}>
-          👉 QUERO ACESSO IMEDIATO À ESTRATEGIA CHINESA
+          QUERO ACESSO IMEDIATO À ESTRATEGIA CHINESA
         </Link>
       </Button>
     </div>
