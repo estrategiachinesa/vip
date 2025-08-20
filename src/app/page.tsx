@@ -6,7 +6,7 @@ import {
   Goal,
   ShieldCheck,
   Star,
-  Waves,
+  LineChart,
   Youtube as YoutubeIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -95,10 +95,10 @@ const ProblemSection = () => (
 
 const solutionFeatures = [
   {
-    icon: Waves,
-    title: "Análise de Ondas",
+    icon: LineChart,
+    title: "Price Action",
     description:
-      "Detecta os padrões de ondas do mercado para prever movimentos com alta precisão.",
+      "Faz marcações automáticas de suporte e resistência.",
   },
   {
     icon: CheckSquare,
