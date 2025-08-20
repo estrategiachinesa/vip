@@ -9,18 +9,16 @@ import { cn } from "@/lib/utils";
 const CustomProgressBar = ({ 
   progress, 
   duration, 
-  isPlaying 
 }: { 
   progress: number, 
   duration: number, 
-  isPlaying: boolean 
 }) => {
-  const progressPercent = (progress / duration) * 100;
+  const progressPercent = duration > 0 ? (progress / duration) * 100 : 0;
 
   return (
     <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gray-500/50">
       <div
-        className="h-full bg-primary transition-all duration-1000 linear"
+        className="h-full bg-primary transition-all duration-100 linear"
         style={{ 
           width: `${progressPercent}%`,
         }}
@@ -67,11 +65,17 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
       }
+      if (playerRef.current) {
+        playerRef.current.destroy();
+      }
     };
 
-  }, []);
+  }, [videoId]);
 
   const createPlayer = () => {
+    if (playerRef.current) {
+      playerRef.current.destroy();
+    }
     const startTime = parseFloat(localStorage.getItem(`videoTime_${videoId}`) || '0');
     playerRef.current = new (window as any).YT.Player('youtube-player-iframe', {
       videoId: videoId,
@@ -102,6 +106,7 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
   };
 
   const onPlayerStateChange = (event: any) => {
+    const player = event.target;
     if (event.data === (window as any).YT.PlayerState.ENDED) {
       setVideoEnded(true);
       setIsPlaying(false);
@@ -109,21 +114,26 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
       }
-    }
-    if (event.data === (window as any).YT.PlayerState.PLAYING) {
+    } else if (event.data === (window as any).YT.PlayerState.PLAYING) {
         setIsPlaying(true);
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
+        }
         progressIntervalRef.current = setInterval(() => {
-            const currentTime = event.target.getCurrentTime();
-            setProgress(currentTime);
-            localStorage.setItem(`videoTime_${videoId}`, currentTime.toString());
+            const currentTime = player.getCurrentTime();
+            if (currentTime !== undefined) {
+              setProgress(currentTime);
+              localStorage.setItem(`videoTime_${videoId}`, currentTime.toString());
+            }
         }, 1000);
     } else {
         setIsPlaying(false);
         if (progressIntervalRef.current) {
             clearInterval(progressIntervalRef.current);
         }
-        if (event.target.getCurrentTime) {
-          localStorage.setItem(`videoTime_${videoId}`, event.target.getCurrentTime().toString());
+        const currentTime = player.getCurrentTime();
+        if (currentTime !== undefined) {
+          localStorage.setItem(`videoTime_${videoId}`, currentTime.toString());
         }
     }
   };
@@ -144,22 +154,22 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
   }
 
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black shadow-2xl">
+    <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black shadow-2xl group">
       {!videoEnded ? (
         <>
-          <div id="youtube-player-iframe" className="absolute top-0 left-0 h-full w-full pointer-events-none"></div>
+          <div id="youtube-player-iframe" className="absolute top-0 left-0 h-full w-full"></div>
           
-          <div className="absolute inset-0 flex items-center justify-center" onClick={togglePlay}>
+          <div className="absolute inset-0 flex items-center justify-center cursor-pointer" onClick={togglePlay}>
              <button
-                aria-label={isPlaying ? "Pause" : "Play"}
-                className={cn("bg-black/50 text-white rounded-full p-4 transition-opacity duration-300 opacity-0 hover:opacity-75 focus:opacity-100 group-hover:opacity-100",
+                aria-label={isPlaying ? "Pausar" : "Reproduzir"}
+                className={cn("bg-black/50 text-white rounded-full p-4 transition-opacity duration-300 opacity-0 group-hover:opacity-75 focus:opacity-100",
                 !isPlaying && "opacity-100"
                 )}
               >
                 {isPlaying ? <Pause className="h-10 w-10" /> : <Play className="h-10 w-10" />}
               </button>
           </div>
-          <CustomProgressBar isPlaying={isPlaying} progress={progress} duration={duration} />
+          <CustomProgressBar progress={progress} duration={duration} />
         </>
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-center bg-gray-800 text-white p-8 text-center">
