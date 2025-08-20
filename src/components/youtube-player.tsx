@@ -100,7 +100,9 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
     setDuration(event.target.getDuration());
     const storedTime = parseFloat(localStorage.getItem(`videoTime_${videoId}`) || '0');
     if (storedTime > 0) {
+        // We seek to the stored time but do not play it automatically.
         event.target.seekTo(storedTime, true);
+        event.target.pauseVideo();
         setProgress(storedTime);
     }
   };
@@ -132,7 +134,7 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
             clearInterval(progressIntervalRef.current);
         }
         const currentTime = player.getCurrentTime();
-        if (currentTime !== undefined) {
+        if (currentTime !== undefined && currentTime > 0) { // Avoid saving 0 on initial load
           localStorage.setItem(`videoTime_${videoId}`, currentTime.toString());
         }
     }
