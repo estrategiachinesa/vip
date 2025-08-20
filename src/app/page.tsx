@@ -56,7 +56,7 @@ const HeroSection = () => (
         Descubra a Estratégia Chinesa: O indicador que revela o momento exato
         para entrar e vencer em Opções Binárias no M1, sem usar Martingale.
       </p>
-      <Button asChild size="lg" className="mt-8 text-base md:text-lg font-bold px-6 md:px-8">
+      <Button asChild size="lg" className="mt-8 text-base md:text-lg font-bold px-4 sm:px-6 md:px-8">
         <Link href={CTA_URL}>
           QUERO ACESSO IMEDIATO À ESTRATEGIA CHINESA
         </Link>
@@ -280,7 +280,7 @@ const OfferSection = () => (
               <Button
                 asChild
                 size="lg"
-                className="mt-6 w-full text-base md:text-lg font-bold animate-pulse"
+                className="mt-6 w-full text-base font-bold animate-pulse"
               >
                 <Link href={CTA_URL}>
                   SIM, QUERO MEU ACESSO AGORA!
@@ -437,5 +437,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
