@@ -33,15 +33,13 @@ const HighlightedText = ({ text }: { text: string }) => {
   );
 };
 
-export default async function TestimonialCard({
+export default function TestimonialCard({
   name,
   location,
   image,
   imageHint,
   testimonial,
 }: TestimonialCardProps) {
-  let highlightedText = testimonial;
-
   return (
     <Card className="flex flex-col items-center justify-center p-6 text-center shadow-lg bg-card">
       <CardContent className="pt-6">
@@ -50,7 +48,7 @@ export default async function TestimonialCard({
             <Star key={i} className="h-5 w-5 text-accent fill-accent" />
           ))}
         </div>
-        <HighlightedText text={highlightedText} />
+        <HighlightedText text={testimonial} />
       </CardContent>
       <CardFooter className="flex flex-col items-center mt-4">
         <UserCircle2 className="h-16 w-16 mb-2 text-muted-foreground" />
