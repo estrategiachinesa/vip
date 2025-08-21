@@ -1,4 +1,3 @@
-import { highlightTestimonial } from "@/ai/flows/highlight-testimonial";
 import Image from "next/image";
 import { Star, UserCircle2 } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -34,25 +33,14 @@ const HighlightedText = ({ text }: { text: string }) => {
   );
 };
 
-export default async function TestimonialCard({
+export default function TestimonialCard({
   name,
   location,
   image,
   imageHint,
   testimonial,
 }: TestimonialCardProps) {
-  let highlightedText = testimonial;
-  // Only call the AI function if the API key is set.
-  if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'YOUR_API_KEY_HERE') {
-    try {
-      const result = await highlightTestimonial({ testimonial });
-      if(result?.highlightedText) {
-        highlightedText = result.highlightedText;
-      }
-    } catch (error) {
-      console.error("Failed to highlight testimonial:", error);
-    }
-  }
+  const highlightedText = testimonial;
 
   return (
     <Card className="flex flex-col items-center justify-center p-6 text-center shadow-lg bg-card">
