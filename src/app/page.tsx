@@ -208,7 +208,12 @@ const TestimonialsSection = () => (
       </p>
       <div className="mt-12 grid gap-8 md:grid-cols-2">
         {testimonials.map((testimonial, index) => (
-          <TestimonialCard key={index} {...testimonial} />
+          <TestimonialCard
+            key={index}
+            name={testimonial.name}
+            location={testimonial.location}
+            testimonial={testimonial.testimonial}
+          />
         ))}
       </div>
     </div>
@@ -218,7 +223,7 @@ const TestimonialsSection = () => (
 const bonuses = [
   "Acesso a um grupo VIP no Telegram para networking e suporte.",
   "Ferramentas de Inteligência artificial para auxiliar nas analises",
-  "Aulas bônus sobre mentalidade e controle emocional no trading.",
+  "Truques e segredos para proteger seu capital",
 ];
 
 const OfferSection = () => (
