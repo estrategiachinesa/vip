@@ -221,7 +221,7 @@ const TestimonialsSection = () => (
 );
 
 const bonuses = [
-  "Acesso a um grupo VIP no Telegram para networking e suporte.",
+  "Acesso a um grupo VIP no Telegram para networking e suporte",
   "Ferramentas de Inteligência artificial para auxiliar nas analises",
   "Truques e segredos para proteger seu capital",
 ];
