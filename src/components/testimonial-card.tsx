@@ -6,8 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 type TestimonialCardProps = {
   name: string;
   location: string;
-  image: string;
-  imageHint: string;
   testimonial: string;
 };
 
@@ -36,10 +34,9 @@ const HighlightedText = ({ text }: { text: string }) => {
 export default function TestimonialCard({
   name,
   location,
-  image,
-  imageHint,
   testimonial,
 }: TestimonialCardProps) {
+  const highlightedText = testimonial;
   return (
     <Card className="flex flex-col items-center justify-center p-6 text-center shadow-lg bg-card">
       <CardContent className="pt-6">
@@ -48,7 +45,7 @@ export default function TestimonialCard({
             <Star key={i} className="h-5 w-5 text-accent fill-accent" />
           ))}
         </div>
-        <HighlightedText text={testimonial} />
+        <HighlightedText text={highlightedText} />
       </CardContent>
       <CardFooter className="flex flex-col items-center mt-4">
         <UserCircle2 className="h-16 w-16 mb-2 text-muted-foreground" />

@@ -186,16 +186,12 @@ const testimonials = [
   {
     name: "Mariana L.",
     location: "São Paulo, SP",
-    image: "https://placehold.co/100x100.png",
-    imageHint: "woman portrait",
     testimonial:
       "Depois de meses pulando de galho em galho, finalmente encontrei uma estratégia que funciona. O indicador é incrivelmente preciso e fácil de usar. Bati minha meta semanal em apenas dois dias!",
   },
   {
     name: "Ricardo P.",
     location: "Belo Horizonte, MG",
-    image: "https://placehold.co/100x100.png",
-    imageHint: "man portrait",
     testimonial:
       "Eu era cético no início, mas a Estratégia Chinesa superou todas as minhas expectativas. Sem Martingale, meu risco diminuiu e meus lucros aumentaram. Recomendo para qualquer um que queira levar o trading a sério.",
   },
