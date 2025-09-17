@@ -2,7 +2,7 @@ import Image from "next/image";
 import {
   AlertTriangle,
   CheckCircle2,
-  CheckSquare,
+  SquareCheckBig,
   Goal,
   ShieldCheck,
   Star,
@@ -30,15 +30,21 @@ import TestimonialCard from "@/components/testimonial-card";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-const CTA_URL = "https://pay.hotmart.com/D76247330M";
+const CTA_URL = "https://pay.hotmart.com/D76247330M?checkoutMode=2";
+
+const HotmartButton = ({ className }: { className?: string }) => (
+  <a href={CTA_URL} className={cn("hotmart-fb hotmart__button-checkout", className)}>
+    <Image src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora" width={300} height={60} unoptimized />
+  </a>
+);
 
 const Header = () => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-sm">
     <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
       <Logo />
-      <Button asChild className="hidden sm:inline-flex">
-        <Link href={CTA_URL}>Pegar Acesso</Link>
-      </Button>
+      <div className="hidden sm:inline-flex">
+        <HotmartButton />
+      </div>
     </div>
   </header>
 );
@@ -56,11 +62,9 @@ const HeroSection = () => (
         Descubra a Estratégia Chinesa: O indicador que revela o momento exato
         para entrar e vencer em Opções Binárias no M1, sem usar Martingale.
       </p>
-      <Button asChild size="lg" className="mt-8 text-base md:text-lg font-bold px-4 sm:px-6 md:px-8">
-        <Link href={CTA_URL}>
-          QUERO ACESSO IMEDIATO À ESTRATEGIA CHINESA
-        </Link>
-      </Button>
+      <div className="mt-8">
+        <HotmartButton />
+      </div>
     </div>
   </section>
 );
@@ -101,7 +105,7 @@ const solutionFeatures = [
       "Faz marcações automáticas de suporte e resistência.",
   },
   {
-    icon: CheckSquare,
+    icon: SquareCheckBig,
     title: "Confirmação de Entrada",
     description:
       "Sinaliza o momento exato da entrada, eliminando dúvidas e hesitações.",
@@ -278,15 +282,9 @@ const OfferSection = () => (
                 12x de R$20,37
               </p>
               <p className="font-bold text-foreground">ou R$ 197,00 à vista</p>
-              <Button
-                asChild
-                size="lg"
-                className="mt-6 w-full text-base font-bold animate-pulse"
-              >
-                <Link href={CTA_URL}>
-                  SIM, QUERO MEU ACESSO AGORA!
-                </Link>
-              </Button>
+              <div className="mt-6 w-full flex justify-center">
+                <HotmartButton />
+              </div>
               <div className="mt-6">
                 <p className="font-bold text-primary">A OFERTA TERMINA EM:</p>
                 <CountdownTimer />
@@ -389,15 +387,11 @@ const FinalCtaSection = () => (
           </p>
         </div>
       </div>
-      <Button
-        asChild
-        size="lg"
-        className="mt-12 text-base md:text-xl font-bold animate-pulse px-6 md:px-8"
+      <div
+        className="mt-12 text-base md:text-xl font-bold"
       >
-        <Link href={CTA_URL}>
-          QUERO A DECISÃO INTELIGENTE!
-        </Link>
-      </Button>
+        <HotmartButton />
+      </div>
     </div>
   </section>
 );

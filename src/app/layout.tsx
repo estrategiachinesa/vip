@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Estratégia Chinesa',
@@ -24,6 +25,21 @@ export default function RootLayout({
       <body className={cn("font-body antialiased", "bg-background")}>
         {children}
         <Toaster />
+        <Script id="hotmart-script" strategy="afterInteractive">
+          {`
+            function importHotmart(){ 
+              var imported = document.createElement('script'); 
+              imported.src = 'https://static.hotmart.com/checkout/widget.min.js'; 
+              document.head.appendChild(imported); 
+              var link = document.createElement('link'); 
+              link.rel = 'stylesheet'; 
+              link.type = 'text/css'; 
+              link.href = 'https://static.hotmart.com/css/hotmart-fb.min.css'; 
+              document.head.appendChild(link);
+            } 
+            importHotmart(); 
+          `}
+        </Script>
       </body>
     </html>
   );
