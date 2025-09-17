@@ -30,7 +30,7 @@ import TestimonialCard from "@/components/testimonial-card";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-const CTA_URL = "https://pay.hotmart.com/D76247330M?checkoutMode=2";
+const CTA_URL = "https://pay.hotmart.com/E101943327K?checkoutMode=2";
 
 const HotmartButton = ({ className }: { className?: string }) => (
   <a href={CTA_URL} className={cn("hotmart-fb hotmart__button-checkout", className)}>
