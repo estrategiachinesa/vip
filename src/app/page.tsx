@@ -30,7 +30,7 @@ import TestimonialCard from "@/components/testimonial-card";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-const CTA_URL = "https://pay.kiwify.com.br/N2HRXHr";
+const CTA_URL = "https://pay.hotmart.com/D76247330M";
 
 const Header = () => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-sm">
