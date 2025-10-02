@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Youtube, Play, Pause } from "lucide-react";
+import { Youtube, Play, Pause, Maximize } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const CustomProgressBar = ({ 
@@ -148,13 +148,16 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
         playerRef.current.pauseVideo();
       } else {
         playerRef.current.playVideo();
-        const iframe = playerRef.current.getIframe();
-        if (iframe) {
-          const requestFullScreen = iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen;
-          if (requestFullScreen) {
-            requestFullScreen.call(iframe);
-          }
-        }
+      }
+    }
+  };
+
+  const enterFullScreen = () => {
+    const iframe = playerRef.current?.getIframe();
+    if (iframe) {
+      const requestFullScreenFn = iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen;
+      if (requestFullScreenFn) {
+        requestFullScreenFn.call(iframe);
       }
     }
   };
@@ -180,6 +183,15 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
               </button>
           </div>
           <CustomProgressBar progress={progress} duration={duration} />
+          <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button 
+              onClick={enterFullScreen} 
+              aria-label="Tela cheia"
+              className="text-white p-2 rounded-full bg-black/50"
+            >
+              <Maximize className="w-5 h-5" />
+            </button>
+          </div>
         </>
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-center bg-gray-800 text-white p-8 text-center">
