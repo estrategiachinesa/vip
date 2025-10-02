@@ -87,6 +87,7 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
         iv_load_policy: 3,
         modestbranding: 1,
         disablekb: 1,
+        playsinline: 1, // Important for mobile fullscreen behavior
         start: Math.floor(startTime),
       },
       events: {
@@ -147,6 +148,13 @@ export default function YoutubePlayer({ videoId }: { videoId: string }) {
         playerRef.current.pauseVideo();
       } else {
         playerRef.current.playVideo();
+        const iframe = playerRef.current.getIframe();
+        if (iframe) {
+          const requestFullScreen = iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen;
+          if (requestFullScreen) {
+            requestFullScreen.call(iframe);
+          }
+        }
       }
     }
   };
