@@ -33,10 +33,8 @@ import { cn } from "@/lib/utils";
 const CTA_URL = "https://pay.hotmart.com/E101943327K?checkoutMode=2&off=cy5v5mrr";
 
 const HotmartButton = ({ className }: { className?: string }) => (
-  <a href={CTA_URL} className={cn("hotmart-fb hotmart__button-checkout", className)}>
-    <span className="font-headline text-lg font-bold uppercase bg-primary hover:bg-yellow-400 transition-colors text-primary-foreground py-4 px-8 rounded-md shadow-lg">
-      Quero a Oferta de Black Friday
-    </span>
+  <a href={CTA_URL} className={cn("hotmart-fb hotmart__button-checkout font-headline text-lg font-bold uppercase", className)}>
+    Quero a Oferta de Black Friday
   </a>
 );
 
