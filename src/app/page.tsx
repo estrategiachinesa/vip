@@ -30,16 +30,18 @@ import TestimonialCard from "@/components/testimonial-card";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-const CTA_URL = "https://pay.hotmart.com/E101943327K?bid=1758090524308";
+const CTA_URL = "https://pay.hotmart.com/E101943327K?checkoutMode=2&off=cy5v5mrr";
 
 const HotmartButton = ({ className }: { className?: string }) => (
   <a href={CTA_URL} className={cn("hotmart-fb hotmart__button-checkout", className)}>
-    <Image src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora" width={300} height={60} unoptimized />
+    <span className="font-headline text-lg font-bold uppercase bg-primary hover:bg-yellow-400 transition-colors text-primary-foreground py-4 px-8 rounded-md shadow-lg">
+      Quero a Oferta de Black Friday
+    </span>
   </a>
 );
 
 const Header = () => (
-  <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-sm">
+  <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-md shadow-primary/20">
     <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
       <Logo />
       <div className="hidden sm:inline-flex">
@@ -52,15 +54,18 @@ const Header = () => (
 const HeroSection = () => (
   <section
     id="hero"
-    className="relative flex min-h-screen items-center justify-center bg-gray-900 pt-16"
+    className="relative flex min-h-screen items-center justify-center bg-background pt-16"
   >
+    <div className="absolute inset-0 bg-black/80 z-0"></div>
     <div className="container relative z-10 mx-auto px-4 text-center text-white">
-      <h1 className="font-headline text-4xl font-bold uppercase tracking-tight text-white md:text-6xl lg:text-7xl">
-        ALCANCE A CONSISTÊNCIA QUE VOCÊ SEMPRE BUSCOU NO TRADING
+      <h1 className="font-headline text-4xl font-bold uppercase tracking-tight text-primary md:text-6xl lg:text-7xl">
+        BLACK FRIDAY
       </h1>
-      <p className="mt-4 max-w-3xl mx-auto font-body text-lg md:text-xl text-gray-200">
-        Descubra a Estratégia Chinesa: O indicador que revela o momento exato
-        para entrar e vencer em Opções Binárias no M1, sem usar Martingale.
+      <p className="mt-4 font-headline text-2xl font-semibold uppercase tracking-tight text-white md:text-4xl lg:text-5xl">
+        A Consistência no Trading com um Desconto Único!
+      </p>
+      <p className="mt-6 max-w-3xl mx-auto font-body text-lg md:text-xl text-gray-300">
+        Esta é a sua chance de ter acesso à Estratégia Chinesa, o indicador que te mostra o momento exato para vencer em Opções Binárias no M1, sem Martingale, por um preço que não vai se repetir.
       </p>
       <div className="mt-8">
         <HotmartButton />
@@ -80,10 +85,10 @@ const ProblemSection = () => (
   <section id="problems" className="py-16 md:py-24 bg-card">
     <div className="container mx-auto px-4 text-center">
       <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">
-        Se você se identifica com isso, você está no lugar certo.
+        Seus problemas acabam <span className="text-primary">HOJE!</span>
       </h2>
       <p className="mt-4 text-muted-foreground text-lg">
-        Muitos traders enfrentam as mesmas dificuldades todos os dias.
+        A Black Friday chegou para eliminar as dificuldades que te impedem de ser consistente.
       </p>
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {problems.map((problem, index) => (
@@ -231,16 +236,15 @@ const bonuses = [
 ];
 
 const OfferSection = () => (
-  <section id="offer" className="py-16 md:py-24 bg-card">
+  <section id="offer" className="py-16 md:py-24 bg-background">
     <div className="container mx-auto px-4">
-      <Card className="max-w-4xl mx-auto shadow-2xl border-2 border-primary">
+      <Card className="max-w-4xl mx-auto shadow-2xl border-2 border-primary bg-card">
         <CardHeader className="text-center bg-primary text-primary-foreground p-6 rounded-t-lg">
           <h2 className="font-headline text-2xl md:text-3xl font-bold">
-            OFERTA ESPECIAL POR TEMPO LIMITADO
+            OFERTA DE BLACK FRIDAY
           </h2>
           <p className="text-base md:text-lg opacity-90">
-            O Acesso Imediato à Estratégia Chinesa está com um preço que não vai
-            se repetir.
+            Sua chance de ouro! Preço especial que não vai se repetir.
           </p>
         </CardHeader>
         <CardContent className="p-6 md:p-8">
@@ -279,9 +283,9 @@ const OfferSection = () => (
             <div className="text-center bg-background p-6 rounded-lg">
               <p className="text-muted-foreground">De <span className="line-through">R$497,00</span> por apenas:</p>
               <p className="font-headline text-4xl md:text-5xl font-bold text-primary my-2">
-                12x de R$20,37
+                12x de R$9,74
               </p>
-              <p className="font-bold text-foreground">ou R$ 197,00 à vista</p>
+              <p className="font-bold text-foreground">ou R$ 97,00 à vista</p>
               <div className="mt-6 w-full flex justify-center">
                 <HotmartButton />
               </div>
@@ -365,25 +369,25 @@ const FinalCtaSection = () => (
   <section id="final-cta" className="py-20 md:py-32">
     <div className="container mx-auto px-4 text-center">
       <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">
-        Você tem duas escolhas agora
+        Aproveite a Black Friday Agora!
       </h2>
       <div className="mt-12 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <div className="p-6 border rounded-lg">
+        <div className="p-6 border rounded-lg border-gray-700">
           <h3 className="font-headline text-2xl font-bold text-muted-foreground">
-            Opção 1: Não Fazer Nada
+            Opção 1: Deixar Passar
           </h3>
           <p className="mt-4 text-muted-foreground">
             Continuar buscando estratégias, perdendo tempo e dinheiro, e se
             frustrando com a falta de consistência.
           </p>
         </div>
-        <div className="p-6 border-2 border-primary rounded-lg shadow-lg">
+        <div className="p-6 border-2 border-primary rounded-lg shadow-lg shadow-primary/20">
           <h3 className="font-headline text-2xl font-bold text-primary">
-            Opção 2: Decisão Inteligente
+            Opção 2: A Decisão Certa
           </h3>
           <p className="mt-4 text-foreground">
-            Pegar um atalho, usar uma estratégia validada e alcançar a
-            consistência que você sempre sonhou, com segurança e suporte.
+            Pegar um atalho com a Estratégia Chinesa por um preço nunca visto e
+            alcançar a consistência que você sempre sonhou.
           </p>
         </div>
       </div>
@@ -397,7 +401,7 @@ const FinalCtaSection = () => (
 );
 
 const Footer = () => (
-  <footer className="bg-gray-800 text-gray-400 py-8">
+  <footer className="bg-gray-900 text-gray-400 py-8">
     <div className="container mx-auto px-4 text-center text-sm">
       <Logo />
       <p className="mt-4">
@@ -415,7 +419,7 @@ const Footer = () => (
 
 export default function Home() {
   return (
-    <div className="flex min-h-[100dvh] flex-col">
+    <div className="flex min-h-[100dvh] flex-col bg-background">
       <Header />
       <main className="flex-1">
         <HeroSection />
