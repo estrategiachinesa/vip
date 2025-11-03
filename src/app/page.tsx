@@ -281,7 +281,7 @@ const OfferSection = () => (
             <div className="text-center bg-background p-6 rounded-lg">
               <p className="text-muted-foreground">De <span className="line-through">R$497,00</span> por apenas:</p>
               <p className="font-headline text-4xl md:text-5xl font-bold text-primary my-2">
-                12x de R$9,74
+                12x de R$10,03
               </p>
               <p className="font-bold text-foreground">ou R$ 97,00 à vista</p>
               <div className="mt-6 w-full flex justify-center">
@@ -310,7 +310,7 @@ const GuaranteeSection = () => (
         <p className="mt-4 text-muted-foreground text-lg">
           Temos tanta confiança na Estratégia Chinesa que oferecemos uma
           garantia incondicional. Se por qualquer motivo você não ficar
-          satisfeito nos primeiros 30 dias, devolvemos 100% do seu dinheiro.
+          satisfeito nos primeiros 7 dias, devolvemos 100% do seu dinheiro.
           Sem perguntas, sem burocracia.
         </p>
       </div>
